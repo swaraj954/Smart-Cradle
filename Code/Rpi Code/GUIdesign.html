@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Cradle Control</title>
+    <script>
+        async function toggleSwing(action) {
+            const response = await fetch('/swing', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action })
+            });
+            const result = await response.json();
+            
+        }
+
+        async function checkMoisture() {
+            const response = await fetch('/moisture-status');
+            const result = await response.json();
+            document.getElementById("moist").innerHTML = result.status;
+        }
+    </script>
+</head>
+<body style="background-image: url('baccha.jpg'); background-color: rgb(255, 223, 171);">
+    <h1><U><B>Smart Cradle Control</B></U></h1>
+    <h3>Swing :</h3>
+    <button style="background-color: #04AA6D;color: white; padding: 15px 32px; text-align: center; text-decoration: none;display: inline-block;
+font-size: 16px;margin: 4px 2px;cursor: pointer;" onclick="toggleSwing('start')">Start Swing</button>
+    <button style="background-color: #aa4f04;color: white; padding: 15px 32px; text-align: center; text-decoration: none;display: inline-block;
+font-size: 16px;margin: 4px 2px;cursor: pointer;" onclick="toggleSwing('stop')">Stop Swing</button>
+    <h3>Poop and Pee Detection :</h3>
+    <button style="background-color: #0235a4;color: white; padding: 15px 32px; text-align: center; text-decoration: none;display: inline-block;
+font-size: 16px;margin: 4px 2px;cursor: pointer;" onclick="checkMoisture()">Check Moisture</button><h5 style="font-size: 24px; color: #04AA6D;" id="moist">No moisture detected</h5>
+
+<h3>Health :</h3>
+<button style="background-color: #0453ff;color: white; padding: 15px 32px; text-align: center; text-decoration: none;display: inline-block;
+font-size: 16px;margin: 4px 2px;cursor: pointer;" onclick="">Check Temperature</button>
+
+<button style="background-color: #0453ff;color: white; padding: 15px 32px; text-align: center; text-decoration: none;display: inline-block;
+font-size: 16px;margin: 4px 2px;cursor: pointer;" onclick="">Check Heart Rate</button>
+<button style="background-color: #0453ff;color: white; padding: 15px 32px; text-align: center; text-decoration: none;display: inline-block;
+font-size: 16px;margin: 4px 2px;cursor: pointer;" onclick="">Check Oxygen</button>
+
+</body>
+</html>
